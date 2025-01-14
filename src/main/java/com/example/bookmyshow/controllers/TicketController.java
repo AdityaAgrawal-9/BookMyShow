@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.persistence.*;
 
 @RestController
-@RequestMapping("/ticket")
+@RequestMapping("ticket/")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -21,8 +21,10 @@ public class TicketController {
     @PostMapping(path = "/book")
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody BookTicketResponseDto bookTicket(@RequestBody BookTicketRequestDto request){
+
         System.out.println("Request for booking received.");
         System.out.println(request);
+
         Booking booking = ticketService.book(request.getShowSeatIds());
         return BookTicketResponseDto.builder()
                 .bookingReference(booking.getId())
