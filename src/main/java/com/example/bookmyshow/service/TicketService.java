@@ -4,6 +4,7 @@ import com.example.bookmyshow.exception.SeatNotFoundException;
 import com.example.bookmyshow.models.Booking;
 import com.example.bookmyshow.models.ShowSeat;
 import com.example.bookmyshow.models.ShowSeatStatus;
+import com.example.bookmyshow.repository.BookingRepository;
 import com.example.bookmyshow.repository.ShowSeatRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ import java.util.List;
 public class TicketService {
 
     private final ShowSeatRepository showSeatRepository;
+    private final BookingRepository bookingRepository;
 
-    public TicketService(ShowSeatRepository showSeatRepository) {
+    public TicketService(ShowSeatRepository showSeatRepository, BookingRepository bookingRepository) {
         this.showSeatRepository = showSeatRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     public Booking book(List<Long> showSeatIds) {
@@ -41,7 +44,7 @@ public class TicketService {
                 .show(showSeatList.get(0).getShow())
                 .build();
 
-//      BookingRepository.save(booking);
+        bookingRepository.save(booking);
         return booking;
     }
 }

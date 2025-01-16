@@ -31,6 +31,7 @@ public class TicketController {
                 .amount(booking.getAmount())
                 .seatIds(booking.getShowSeatList().stream().map(showSeat -> showSeat.getId()).toList())
                 .theatreName(booking.getShowSeatList().get(0).getShow().getScreen().getTheatre().getName())
+                .showName(booking.getShow().getMovie().getName())
                 .build();
     }
 
